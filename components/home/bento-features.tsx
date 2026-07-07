@@ -1,11 +1,15 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { Compass, Gem, ShieldCheck, Users } from 'lucide-react'
 import { SectionHeading } from '@/components/section-heading'
 import { Reveal } from '@/components/motion/reveal'
 
 export function BentoFeatures() {
   return (
-    <section className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
+    <section
+      id="bento-features"
+      className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32"
+    >
       <SectionHeading
         eyebrow="Why Vance & Co."
         title="An uncommon standard, held from first sketch to final detail."
@@ -14,17 +18,20 @@ export function BentoFeatures() {
       />
 
       <div className="grid auto-rows-[minmax(0,1fr)] grid-cols-1 gap-5 md:grid-cols-3 md:grid-rows-2">
-        {/* Large feature with image */}
         <Reveal className="md:col-span-2 md:row-span-2">
-          <article className="relative flex h-full min-h-[420px] flex-col justify-end overflow-hidden rounded-sm border border-border p-8">
+          <Link
+            href="/process"
+            className="group relative flex h-full min-h-[420px] flex-col justify-end overflow-hidden rounded-sm border border-border/50 p-8 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_24px_64px_-32px_rgba(0,0,0,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+          >
             <Image
               src="/images/feature-craft.png"
               alt="Master craftsman finishing custom walnut joinery"
               fill
               sizes="(max-width: 768px) 100vw, 66vw"
-              className="object-cover"
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/30 to-transparent" />
+            <span className="absolute left-0 top-0 h-0.5 w-0 bg-primary transition-all duration-500 group-hover:w-full" />
             <div className="relative z-10 max-w-md text-background">
               <Gem className="size-7 text-primary" />
               <h3 className="mt-4 font-heading text-3xl font-medium">
@@ -36,11 +43,15 @@ export function BentoFeatures() {
                 have spent a lifetime perfecting it.
               </p>
             </div>
-          </article>
+          </Link>
         </Reveal>
 
         <Reveal delay={0.05}>
-          <article className="flex h-full flex-col gap-3 rounded-sm border border-border bg-card p-8">
+          <Link
+            href="/process"
+            className="group flex h-full flex-col gap-3 rounded-sm border border-border/50 bg-card p-8 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+          >
+            <span className="h-0.5 w-0 bg-primary transition-all duration-500 group-hover:w-12" />
             <Compass className="size-7 text-primary" />
             <h3 className="font-heading text-2xl font-medium">
               Architecture-led
@@ -49,11 +60,12 @@ export function BentoFeatures() {
               Design integrity drives every decision. We protect the vision from
               concept through construction.
             </p>
-          </article>
+          </Link>
         </Reveal>
 
         <Reveal delay={0.1}>
-          <article className="flex h-full flex-col gap-3 rounded-sm border border-border bg-card p-8">
+          <article className="group flex h-full flex-col gap-3 rounded-sm border border-border/50 bg-card p-8 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40">
+            <span className="h-0.5 w-0 bg-primary transition-all duration-500 group-hover:w-12" />
             <Users className="size-7 text-primary" />
             <h3 className="font-heading text-2xl font-medium">
               One accountable lead
@@ -66,7 +78,10 @@ export function BentoFeatures() {
         </Reveal>
 
         <Reveal delay={0.15} className="md:col-span-3">
-          <article className="flex h-full flex-col items-start gap-4 rounded-sm border border-border bg-secondary p-8 md:flex-row md:items-center md:justify-between">
+          <Link
+            href="/investment"
+            className="group flex h-full flex-col items-start gap-4 rounded-sm border border-border/50 bg-secondary p-8 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 md:flex-row md:items-center md:justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+          >
             <div className="flex items-start gap-4">
               <ShieldCheck className="size-7 shrink-0 text-primary" />
               <div>
@@ -79,7 +94,10 @@ export function BentoFeatures() {
                 </p>
               </div>
             </div>
-          </article>
+            <span className="text-sm font-medium uppercase tracking-[0.2em] text-primary opacity-0 transition-opacity group-hover:opacity-100">
+              View investment →
+            </span>
+          </Link>
         </Reveal>
       </div>
     </section>

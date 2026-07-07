@@ -1,3 +1,5 @@
+'use client'
+
 import { Reveal, StaggerGroup, StaggerItem } from '@/components/motion/reveal'
 
 const commitments = [
@@ -5,21 +7,25 @@ const commitments = [
     value: '5-Year',
     label: 'Structural & systems warranty',
     detail: 'Comprehensive coverage backed by an ongoing stewardship program.',
+    animate: false,
   },
   {
     value: 'Bi-Weekly',
     label: 'Private client briefing',
     detail: 'A standing 15-minute update so you are never left wondering.',
+    animate: false,
   },
   {
     value: 'Single',
     label: 'Accountable project lead',
     detail: 'One principal owns your residence from first sketch to handover.',
+    animate: false,
   },
   {
     value: '24/7',
     label: 'Live progress portal',
     detail: 'See your home take shape from anywhere in the world.',
+    animate: false,
   },
 ]
 

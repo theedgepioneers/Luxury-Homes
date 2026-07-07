@@ -48,6 +48,8 @@ export default function InvestmentPage() {
         eyebrow="Investment"
         title="Clarity from the very first conversation."
         description="We believe transparency is a form of respect. Here is how we frame the investment behind a Vance & Co. residence."
+        image="/images/investment-interior.png"
+        imageAlt="A refined custom home interior with bespoke finishes"
       />
 
       <section className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">

@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { Check } from 'lucide-react'
+import { Check, Loader2 } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
@@ -14,19 +14,38 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
-type Errors = Partial<Record<'name' | 'email' | 'scope', string>>
+type Errors = Partial<Record<'name' | 'email' | 'scope' | 'form', string>>
 
 const scopeOptions = [
   { value: 'new-build', label: 'New Custom Build' },
   { value: 'transformation', label: 'Whole-Home Transformation' },
 ]
 
+const nextSteps = [
+  {
+    step: '01',
+    title: 'Submit your inquiry',
+    detail: 'Share your vision in confidence under mutual NDA.',
+  },
+  {
+    step: '02',
+    title: 'Principal review within 48 hours',
+    detail: 'A senior principal reviews every submission personally.',
+  },
+  {
+    step: '03',
+    title: 'Private consultation call',
+    detail: 'We arrange a confidential conversation at your convenience.',
+  },
+]
+
 export function ConsultationForm() {
   const [scope, setScope] = useState<string | null>(null)
   const [errors, setErrors] = useState<Errors>({})
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const form = event.currentTarget
     const data = new FormData(form)
@@ -43,13 +62,43 @@ export function ConsultationForm() {
     if (!scope) nextErrors.scope = 'Please select a project scope.'
 
     setErrors(nextErrors)
-    if (Object.keys(nextErrors).length === 0) {
+    if (Object.keys(nextErrors).length > 0) return
+
+    setSubmitting(true)
+    setErrors({})
+
+    try {
+      const res = await fetch('/api/consultation', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          email,
+          phone: String(data.get('phone') ?? '').trim() || undefined,
+          location: String(data.get('location') ?? '').trim() || undefined,
+          scope,
+          message: String(data.get('message') ?? '').trim() || undefined,
+        }),
+      })
+
+      if (!res.ok) {
+        const json = await res.json().catch(() => ({}))
+        setErrors({
+          form: json.error ?? 'Something went wrong. Please try again.',
+        })
+        return
+      }
+
       setSubmitted(true)
+    } catch {
+      setErrors({ form: 'Unable to submit. Please check your connection and try again.' })
+    } finally {
+      setSubmitting(false)
     }
   }
 
   return (
-    <div className="rounded-sm border border-border bg-card p-6 sm:p-10">
+    <div className="rounded-sm border border-border/50 bg-card p-6 sm:p-10">
       <AnimatePresence mode="wait">
         {submitted ? (
           <motion.div
@@ -69,6 +118,17 @@ export function ConsultationForm() {
               touch personally and in confidence to arrange your private
               consultation.
             </p>
+            <ol className="mt-4 w-full max-w-sm space-y-4 border-t border-border pt-8 text-left">
+              {nextSteps.map((item) => (
+                <li key={item.step} className="flex gap-4">
+                  <span className="font-heading text-lg text-primary">{item.step}</span>
+                  <div>
+                    <div className="font-medium">{item.title}</div>
+                    <div className="text-sm text-muted-foreground">{item.detail}</div>
+                  </div>
+                </li>
+              ))}
+            </ol>
           </motion.div>
         ) : (
           <motion.form
@@ -162,10 +222,16 @@ export function ConsultationForm() {
               />
             </div>
 
+            {errors.form && (
+              <p className="text-sm text-destructive">{errors.form}</p>
+            )}
+
             <button
               type="submit"
-              className="mt-2 inline-flex items-center justify-center rounded-sm bg-primary px-7 py-3.5 text-sm font-medium tracking-wide text-primary-foreground transition-colors hover:bg-primary/85"
+              disabled={submitting}
+              className="mt-2 inline-flex items-center justify-center gap-2 rounded-sm bg-primary px-7 py-3.5 text-sm font-medium tracking-wide text-primary-foreground transition-colors hover:bg-primary/85 disabled:opacity-60"
             >
+              {submitting && <Loader2 className="size-4 animate-spin" />}
               Request Private Consultation
             </button>
             <p className="text-center text-xs text-muted-foreground">

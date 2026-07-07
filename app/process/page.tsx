@@ -18,6 +18,8 @@ export default function ProcessPage() {
         eyebrow="The Process"
         title="A deliberate path from imagination to permanence."
         description="Great homes are not rushed. Our process is built to remove uncertainty and protect the vision at every stage."
+        image="/images/process-site.png"
+        imageAlt="Architects reviewing plans on a custom home construction site"
       />
 
       <section className="relative mx-auto max-w-5xl px-6 py-20 lg:px-10 lg:py-28">

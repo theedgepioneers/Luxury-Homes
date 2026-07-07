@@ -6,6 +6,8 @@ export type CaseStudy = {
   narrative: string
   stat: { label: string; value: string }
   image?: string
+  gallery?: string[]
+  highlights?: string[]
   featured?: boolean
 }
 
@@ -19,6 +21,16 @@ export const caseStudies: CaseStudy[] = [
       'A single-level glass pavilion cantilevered over the Pacific bluff, engineered to dissolve the line between interior and horizon. Board-formed concrete and rift-sawn oak ground the lightness of the structure.',
     stat: { label: 'Living Area', value: '11,400 sq ft' },
     image: '/images/case-cliffside.png',
+    gallery: [
+      '/images/case-cliffside.png',
+      '/images/case-dune.png',
+      '/images/hero-estate.png',
+    ],
+    highlights: [
+      'Cantilevered glass pavilion over Pacific bluff',
+      'Board-formed concrete and rift-sawn oak',
+      'Completed on schedule in 31 months',
+    ],
     featured: true,
   },
   {
@@ -30,6 +42,16 @@ export const caseStudies: CaseStudy[] = [
       'A contemporary mountain residence in reclaimed timber and blackened steel, sited to capture Ajax Mountain views while sheltering an interior courtyard from alpine wind.',
     stat: { label: 'Build Duration', value: '34 months' },
     image: '/images/case-aspen.png',
+    gallery: [
+      '/images/case-aspen.png',
+      '/images/case-highland.png',
+      '/images/feature-craft.png',
+    ],
+    highlights: [
+      'Reclaimed timber and blackened steel',
+      'Interior courtyard sheltered from alpine wind',
+      'Ajax Mountain views from every main room',
+    ],
     featured: true,
   },
   {
@@ -41,6 +63,16 @@ export const caseStudies: CaseStudy[] = [
       'A meticulous reimagining of a 1920s Georgian estate, preserving its formal proportions while introducing a glass garden wing and a subterranean wellness level.',
     stat: { label: 'Investment Tier', value: '$24M+' },
     image: '/images/case-greenwich.png',
+    gallery: [
+      '/images/case-greenwich.png',
+      '/images/case-orchard.png',
+      '/images/investment-interior.png',
+    ],
+    highlights: [
+      '1920s Georgian proportions preserved',
+      'Glass garden wing and subterranean wellness level',
+      'Phased construction with zero structural compromise',
+    ],
     featured: true,
   },
   {
@@ -52,6 +84,11 @@ export const caseStudies: CaseStudy[] = [
       'A weathered-cedar beach house composed as a sequence of gabled volumes, each framing a different relationship to the surf, the dunes, and the evening light.',
     stat: { label: 'Living Area', value: '8,200 sq ft' },
     image: '/images/case-dune.png',
+    gallery: ['/images/case-dune.png', '/images/case-cliffside.png'],
+    highlights: [
+      'Sequence of gabled cedar volumes',
+      'Each volume frames surf, dunes, or evening light',
+    ],
   },
   {
     slug: 'highland-retreat',
@@ -62,6 +99,11 @@ export const caseStudies: CaseStudy[] = [
       'A ski-in residence carved into the hillside, with a stone base anchoring upper volumes of glass and bronze. Radiant terraces extend the living space into the snow.',
     stat: { label: 'Elevation', value: '8,900 ft' },
     image: '/images/case-highland.png',
+    gallery: ['/images/case-highland.png', '/images/case-aspen.png'],
+    highlights: [
+      'Ski-in access at 8,900 ft elevation',
+      'Stone base with glass and bronze upper volumes',
+    ],
   },
   {
     slug: 'orchard-estate',
@@ -72,6 +114,12 @@ export const caseStudies: CaseStudy[] = [
       'A historic farmhouse expanded into a connected family compound, with restored fieldstone, a glass conservatory, and an underground gallery for a private art collection.',
     stat: { label: 'Acreage', value: '14 acres' },
     image: '/images/case-orchard.png',
+    gallery: ['/images/case-orchard.png', '/images/case-greenwich.png'],
+    highlights: [
+      '14-acre family compound',
+      'Restored fieldstone and glass conservatory',
+      'Underground gallery for private art collection',
+    ],
   },
   {
     slug: 'canyon-house',
@@ -81,6 +129,12 @@ export const caseStudies: CaseStudy[] = [
     narrative:
       'A drought-resilient residence terraced into a coastal canyon, with rammed-earth walls, a living roof, and a courtyard pool that mirrors the ridgeline.',
     stat: { label: 'Build Duration', value: '29 months' },
+    image: '/images/case-cliffside.png',
+    gallery: ['/images/case-cliffside.png', '/images/case-dune.png'],
+    highlights: [
+      'Terraced into coastal canyon',
+      'Rammed-earth walls and living roof',
+    ],
   },
   {
     slug: 'lakeside-modern',
@@ -90,6 +144,12 @@ export const caseStudies: CaseStudy[] = [
     narrative:
       'A horizontal composition of stone and glass set along a private shoreline, organized around a central water court that brings reflected light deep into the plan.',
     stat: { label: 'Living Area', value: '9,600 sq ft' },
+    image: '/images/case-orchard.png',
+    gallery: ['/images/case-orchard.png', '/images/investment-interior.png'],
+    highlights: [
+      'Private shoreline setting',
+      'Central water court for reflected light',
+    ],
   },
   {
     slug: 'summit-chalet',
@@ -99,6 +159,12 @@ export const caseStudies: CaseStudy[] = [
     narrative:
       'A dated 1980s chalet stripped to its frame and rebuilt as a warm, light-filled retreat with hand-finished plaster, walnut joinery, and a re-engineered great room.',
     stat: { label: 'Investment Tier', value: '$12M+' },
+    image: '/images/case-aspen.png',
+    gallery: ['/images/case-aspen.png', '/images/case-highland.png', '/images/feature-craft.png'],
+    highlights: [
+      '1980s chalet stripped to frame and rebuilt',
+      'Hand-finished plaster and walnut joinery',
+    ],
   },
   {
     slug: 'meadow-pavilions',
@@ -108,7 +174,23 @@ export const caseStudies: CaseStudy[] = [
     narrative:
       'A family residence composed as linked low pavilions around a central meadow, prioritizing privacy, daylight, and a near-passive energy envelope.',
     stat: { label: 'Living Area', value: '13,100 sq ft' },
+    image: '/images/case-greenwich.png',
+    gallery: ['/images/case-greenwich.png', '/images/case-orchard.png'],
+    highlights: [
+      'Linked pavilions around central meadow',
+      'Near-passive energy envelope',
+    ],
   },
 ]
 
 export const featuredCaseStudies = caseStudies.filter((c) => c.featured)
+
+export function getCaseStudy(slug: string): CaseStudy | undefined {
+  return caseStudies.find((c) => c.slug === slug)
+}
+
+export function getCaseStudyGallery(study: CaseStudy): string[] {
+  if (study.gallery?.length) return study.gallery
+  if (study.image) return [study.image]
+  return ['/placeholder.svg']
+}

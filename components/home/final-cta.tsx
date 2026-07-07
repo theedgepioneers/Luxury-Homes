@@ -14,6 +14,9 @@ export function FinalCta() {
           consultation to explore whether we are the right stewards for your
           vision.
         </p>
+        <p className="text-sm font-medium tracking-wide text-primary">
+          Accepting 4 commissions for 2026
+        </p>
         <CtaButton />
       </Reveal>
     </section>

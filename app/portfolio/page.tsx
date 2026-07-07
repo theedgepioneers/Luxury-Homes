@@ -18,6 +18,8 @@ export default function PortfolioPage() {
         eyebrow="Portfolio"
         title="Ten residences, ten singular acts of trust."
         description="A representative selection of our work. Many commissions remain private at our clients’ request — what follows is a glimpse of what is possible."
+        image="/images/case-greenwich.png"
+        imageAlt="Greenwich Georgian estate exterior"
       />
 
       <section className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">

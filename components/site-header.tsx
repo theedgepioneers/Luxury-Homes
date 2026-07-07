@@ -17,11 +17,16 @@ const navLinks = [
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false)
+  const [scrollProgress, setScrollProgress] = useState(0)
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24)
+    const onScroll = () => {
+      setScrolled(window.scrollY > 24)
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight
+      setScrollProgress(docHeight > 0 ? window.scrollY / docHeight : 0)
+    }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
@@ -98,6 +103,12 @@ export function SiteHeader() {
           <Menu className="size-6" />
         </button>
       </div>
+
+      <div
+        className="h-0.5 origin-left bg-primary transition-transform duration-150"
+        style={{ transform: `scaleX(${scrollProgress})` }}
+        aria-hidden
+      />
 
       <AnimatePresence>
         {open && (

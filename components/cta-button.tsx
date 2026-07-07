@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils'
 type CtaButtonProps = {
   className?: string
   label?: string
+  href?: string
   variant?: 'solid' | 'outline'
   withIcon?: boolean
 }
@@ -12,12 +13,13 @@ type CtaButtonProps = {
 export function CtaButton({
   className,
   label = 'Schedule Private Consultation',
+  href = '/consultation',
   variant = 'solid',
   withIcon = true,
 }: CtaButtonProps) {
   return (
     <Link
-      href="/consultation"
+      href={href}
       className={cn(
         'group inline-flex items-center justify-center gap-2 rounded-sm px-7 py-3.5 text-sm font-medium tracking-wide transition-all duration-300',
         variant === 'solid'

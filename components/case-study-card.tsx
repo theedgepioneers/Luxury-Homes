@@ -1,14 +1,18 @@
+import Link from 'next/link'
+import { ArrowRight, MapPin } from 'lucide-react'
 import Image from 'next/image'
-import { MapPin } from 'lucide-react'
 import type { CaseStudy } from '@/lib/case-studies'
 
 export function CaseStudyCard({ study }: { study: CaseStudy }) {
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-sm border border-border bg-card transition-all duration-500 hover:border-primary/50 hover:shadow-[0_20px_60px_-30px_rgba(0,0,0,0.35)]">
+    <Link
+      href={`/portfolio/${study.slug}`}
+      className="group flex h-full flex-col overflow-hidden rounded-sm border border-border/50 bg-card transition-all duration-500 hover:-translate-y-1 hover:border-primary/50 hover:shadow-[0_20px_60px_-30px_rgba(0,0,0,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+    >
       <div className="relative aspect-[4/3] overflow-hidden bg-muted">
         {study.image ? (
           <Image
-            src={study.image || "/placeholder.svg"}
+            src={study.image}
             alt={`${study.name} — ${study.location}`}
             fill
             sizes="(max-width: 768px) 100vw, 33vw"
@@ -23,6 +27,10 @@ export function CaseStudyCard({ study }: { study: CaseStudy }) {
         )}
         <span className="absolute left-4 top-4 rounded-sm bg-background/90 px-3 py-1 text-xs font-medium tracking-wide backdrop-blur">
           {study.scope}
+        </span>
+        <span className="absolute inset-x-0 bottom-0 flex translate-y-full items-center justify-center gap-2 bg-foreground/80 py-3 text-sm font-medium tracking-wide text-background transition-transform duration-300 group-hover:translate-y-0">
+          View project
+          <ArrowRight className="size-4" />
         </span>
       </div>
       <div className="flex flex-1 flex-col gap-3 p-6">
@@ -45,6 +53,6 @@ export function CaseStudyCard({ study }: { study: CaseStudy }) {
           </span>
         </div>
       </div>
-    </article>
+    </Link>
   )
 }
