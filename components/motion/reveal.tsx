@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useInView, type Variants } from 'motion/react'
-import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { useReducedMotion } from '@/lib/use-reduced-motion'
 
 const ease = [0.22, 1, 0.36, 1] as const
@@ -135,7 +135,7 @@ export function AnimatedCounter({ value, className }: CounterProps) {
   const reduced = useReducedMotion()
   const ref = useRef<HTMLSpanElement>(null)
   const inView = useInView(ref, { once: true, margin: '-40px' })
-  const parsed = parseCounterValue(value)
+  const parsed = useMemo(() => parseCounterValue(value), [value])
   const [display, setDisplay] = useState(parsed ? `${parsed.prefix}0${parsed.suffix}` : value)
 
   useEffect(() => {
